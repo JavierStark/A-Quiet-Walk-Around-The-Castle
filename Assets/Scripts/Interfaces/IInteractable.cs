@@ -6,6 +6,6 @@ namespace Interfaces
 {
     public interface IInteractable
     {
-        void Interact();
+        void Interact(GameObject playerWhoInteract);
     }
 }
