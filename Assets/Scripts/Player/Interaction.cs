@@ -23,7 +23,6 @@ namespace Player
         {
             _cameraRoot = transform.GetChild(0);
 
-            _playerInput = GetComponent<PlayerInput>();
             _input = GetComponent<Input>();
 
             _ray = new Ray();

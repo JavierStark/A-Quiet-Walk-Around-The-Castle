@@ -12,6 +12,8 @@ namespace Player
 		public bool jump;
 		public bool sprint;
 		public bool interact;
+		public float inventoryScroll;
+		public float inventoryShortcuts;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -48,7 +50,17 @@ namespace Player
 		public void OnInteract(InputValue value)
         {
 			InteractInput(value.isPressed);
-        }		        
+        }
+
+		public void OnInventoryScroll(InputValue value)
+		{
+			InventoryScrollInput(value.Get<float>());
+		}
+
+		public void OnInventoryShortcuts(InputValue value)
+		{
+			InventoryShortcutsInput(value.Get<float>());
+		}
 
         public void MoveInput(Vector2 newMoveDirection)
 		{
@@ -73,6 +85,16 @@ namespace Player
 		private void InteractInput(bool newPressedState)
 		{
 			interact = newPressedState;
+		}
+
+		private void InventoryScrollInput(float newInventoryScrollState)
+		{
+			inventoryScroll = newInventoryScrollState;
+		}
+
+		private void InventoryShortcutsInput(float newInventoryShortcutsInput)
+		{
+			inventoryShortcuts = newInventoryShortcutsInput;
 		}
 
 #if !UNITY_IOS || !UNITY_ANDROID

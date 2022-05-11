@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using Interfaces;
 using Player;
+using UnityEngine.Serialization;
 
 namespace Interactables
 {
     public class Pickable : MonoBehaviour, IInteractable
     {
-        [SerializeField] private ItemScriptable _itemScriptable;
-        public ItemScriptable GetItem => _itemScriptable;
+        [SerializeField] private ItemScriptable itemScriptable;
+        public ItemScriptable GetItem => itemScriptable;
 
         void IInteractable.Interact(GameObject playerWhoInteract)
         {
             Debug.Log(this.name+ " was interacted");
-            if (playerWhoInteract.GetComponent<Inventory>().AddItem(_itemScriptable)){
+            if (playerWhoInteract.GetComponent<Inventory>().AddItem(itemScriptable)){
                 Debug.Log("Added to Inventory");
                 Destroy(this.gameObject);
             }
@@ -26,7 +27,7 @@ namespace Interactables
 
         void Start()
         {
-            this.name = _itemScriptable.name;
+            this.name = itemScriptable.name;
 
         }
 
