@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UI;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Player
 {
@@ -10,11 +12,12 @@ namespace Player
     {
         [Range(1,10)]public float mouseSensitivity = 25;
         
-        private const int InventorySpaces = 4;
-        [SerializeField] private ItemScriptable[] _items = new ItemScriptable[InventorySpaces];
+        public const int InventorySlots = 4;
+        [SerializeField] private ItemScriptable[] _items = new ItemScriptable[InventorySlots];
         private int _index = 0;
         
         private Input _input;
+        [SerializeField] private InventoryUI inventoryUI; 
         
         private float _scroll;
         private float _lastNumber = 0;
@@ -22,13 +25,19 @@ namespace Player
         private void Start()
         {
             _input = GetComponent<Input>();
+            inventoryUI.Setup(InventorySlots, _index, _items);
         }
 
         private void Update()
         {
             ScrollCheck();
+            int currentIndex = _index;
+            
             IndexChangeByScroll();
             IndexChangeByShortcuts();
+            
+            if(_index != currentIndex) inventoryUI.SetBorder(_index);
+            
             Debug.Log(_index);
         }
 
@@ -43,8 +52,8 @@ namespace Player
             _index += (int)(_scroll/mouseSensitivity);
             _scroll %= mouseSensitivity;
 
-            if (_index >= InventorySpaces) _index = _index - (InventorySpaces - 1) -1;
-            else if (_index < 0) _index = InventorySpaces + _index;
+            if (_index >= InventorySlots) _index = _index - (InventorySlots - 1) -1;
+            else if (_index < 0) _index = InventorySlots + _index;
         }
 
         private void IndexChangeByShortcuts()
