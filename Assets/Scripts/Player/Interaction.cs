@@ -30,12 +30,16 @@ namespace Player
 
         void Update()
         {
+            Interact();
+        }
+
+        private void Interact()
+        {
             _ray.origin = _cameraRoot.position;
             _ray.direction = _cameraRoot.forward;
 
             if (_input.interact)
             {
-                Debug.Log("E key pressed");
                 CastInteractionRayForward();
 
                 IInteractable target = _hitInfo.transform?.GetComponent<IInteractable>();
@@ -45,9 +49,8 @@ namespace Player
                 }
             }
             _input.interact = false;
-        }
-
-        void CastInteractionRayForward()
+        } 
+        private void CastInteractionRayForward()
         {
             Physics.Raycast(_ray, out _hitInfo, maxDistance);
         }

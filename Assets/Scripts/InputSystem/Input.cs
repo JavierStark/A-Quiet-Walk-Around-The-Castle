@@ -12,15 +12,19 @@ namespace Player
 		public bool jump;
 		public bool sprint;
 		public bool interact;
+		public bool drop;
 		public float inventoryScroll;
 		public float inventoryShortcuts;
+
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
 
 #if !UNITY_IOS || !UNITY_ANDROID
+
 		[Header("Mouse Cursor Settings")]
 		public bool cursorLocked = true;
+
 		public bool cursorInputForLook = true;
 #endif
 
@@ -51,6 +55,10 @@ namespace Player
         {
 			InteractInput(value.isPressed);
         }
+		public void OnDrop(InputValue value)
+		{
+			DropInput(value.isPressed);
+		}
 
 		public void OnInventoryScroll(InputValue value)
 		{
@@ -62,29 +70,34 @@ namespace Player
 			InventoryShortcutsInput(value.Get<float>());
 		}
 
-        public void MoveInput(Vector2 newMoveDirection)
+		private void MoveInput(Vector2 newMoveDirection)
 		{
 			move = newMoveDirection;
-		} 
+		}
 
-		public void LookInput(Vector2 newLookDirection)
+		private void LookInput(Vector2 newLookDirection)
 		{
 			look = newLookDirection;
 		}
 
-		public void JumpInput(bool newJumpState)
+		private void JumpInput(bool newJumpState)
 		{
 			jump = newJumpState;
 		}
 
-		public void SprintInput(bool newSprintState)
+		private void SprintInput(bool newSprintState)
 		{
 			sprint = newSprintState;
 		}
 
-		private void InteractInput(bool newPressedState)
+		private void InteractInput(bool newInteractState)
 		{
-			interact = newPressedState;
+			interact = newInteractState;
+		}
+		
+		private void DropInput(bool newDropState)
+		{
+			drop = newDropState;
 		}
 
 		private void InventoryScrollInput(float newInventoryScrollState)

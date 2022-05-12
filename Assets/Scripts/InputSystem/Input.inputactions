@@ -51,6 +51,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Drop",
+                    "type": "Button",
+                    "id": "48a43dde-2974-406c-b92e-a59db4ac9f70",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "InventoryScroll",
                     "type": "PassThrough",
                     "id": "06368a20-b589-485d-9004-14f82278aba3",
@@ -320,6 +329,17 @@
                     "processors": "Scale(factor=4)",
                     "groups": "KeyboardMouse",
                     "action": "InventoryShortcuts",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ffcc8420-8571-484e-9ce1-54faaaa4b6fa",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "Drop",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -3,15 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UI;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 namespace Player
 {
     public class Inventory : MonoBehaviour
     {
-        [Range(1,10)]public float mouseSensitivity = 25;
-        
+        [Range(1,10)][SerializeField] private float mouseSensitivity = 8;
+        [Range(0,20)][SerializeField] private float dropDistance = 2;
+
         public const int InventorySlots = 4;
         [SerializeField] private ItemScriptable[] _items = new ItemScriptable[InventorySlots];
         private int _index = 0;
@@ -30,15 +33,38 @@ namespace Player
 
         private void Update()
         {
+            ItemSelection();
+
+            DropItem();
+        }
+
+        private void DropItem()
+        {
+            if (_input.drop)
+            {
+                Debug.Log("drop");
+                var item = DeleteItem();
+                if (item)
+                {
+                    inventoryUI.DeleteItem(_index);
+                    var t = transform;
+                    Vector3 dropPosition = t.position + t.forward * dropDistance + t.up * 1;
+                    Instantiate(item.objectGameObject, dropPosition, Random.rotation);
+                }
+            }
+
+            _input.drop = false;
+        }
+
+        private void ItemSelection()
+        {
             ScrollCheck();
             int currentIndex = _index;
             
             IndexChangeByScroll();
             IndexChangeByShortcuts();
-            
+
             if(_index != currentIndex) inventoryUI.SetBorder(_index);
-            
-            Debug.Log(_index);
         }
 
         private void ScrollCheck()
@@ -67,10 +93,10 @@ namespace Player
 
         public bool AddItem(ItemScriptable item)
         {
-            if (_items[_index] == null)
+            if (!_items[_index])
             {
                 _items[_index] = item;
-
+                inventoryUI.AddItem(_index, item);
                 return true;
             }
             return false;
