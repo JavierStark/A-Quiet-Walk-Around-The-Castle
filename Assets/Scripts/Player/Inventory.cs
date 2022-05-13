@@ -69,14 +69,17 @@ namespace Player
 
         private void ScrollCheck()
         {
-            if (_input.inventoryScroll > 0) _scroll += 1;
-            else if (_input.inventoryScroll < 0) _scroll -= 1;
+            if (_input.inventoryScroll > 0) _scroll -= 1;
+            else if (_input.inventoryScroll < 0) _scroll += 1;
         }
 
         private void IndexChangeByScroll()
         {
-            _index += (int)(_scroll/mouseSensitivity);
-            _scroll %= mouseSensitivity;
+            float deltaTimeMultiplier = 400;
+            float mouseSensitivityPerSecond = mouseSensitivity * Time.deltaTime * deltaTimeMultiplier;
+            _index += (int)(_scroll/mouseSensitivityPerSecond);
+            _scroll %= mouseSensitivityPerSecond;
+            Debug.Log(_index);
 
             if (_index >= InventorySlots) _index = _index - (InventorySlots - 1) -1;
             else if (_index < 0) _index = InventorySlots + _index;
