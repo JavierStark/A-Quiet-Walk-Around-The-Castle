@@ -15,7 +15,7 @@ namespace Player
         [Range(1,10)][SerializeField] private float mouseSensitivity = 8;
         [Range(0,20)][SerializeField] private float dropDistance = 2;
 
-        public const int InventorySlots = 4;
+        private const int InventorySlots = 4;
         [SerializeField] private ItemScriptable[] _items = new ItemScriptable[InventorySlots];
         private int _index = 0;
         
@@ -42,15 +42,35 @@ namespace Player
         {
             if (_input.drop)
             {
-                Debug.Log("drop");
                 var item = DeleteItem();
+
                 if (item)
                 {
                     inventoryUI.DeleteItem(_index);
                     var t = transform;
-                    Vector3 dropPosition = t.position + t.forward * dropDistance + t.up * 1;
-                    Instantiate(item.objectGameObject, dropPosition, Random.rotation);
+                    var cameraTransform = transform.GetChild(0).transform;
+
+                    Vector3 dropPosition;
+                    Quaternion dropRotation = item.objectGameObject.transform.rotation;
+
+                    Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
+                    RaycastHit raycastHit;
+
+
+                    if (Physics.Raycast(ray, out raycastHit, dropDistance))
+                    {
+                        Debug.Log(raycastHit.collider.gameObject.name);
+                        dropPosition = raycastHit.point + raycastHit.normal * 0.1f;
+                    }
+                    else
+                    {
+                        var forwardDistance = cameraTransform.forward * dropDistance;
+                        dropPosition = cameraTransform.position + forwardDistance;
+                    }
+
+                    Instantiate(item.objectGameObject, dropPosition, dropRotation);
                 }
+
             }
 
             _input.drop = false;
@@ -79,7 +99,6 @@ namespace Player
             float mouseSensitivityPerSecond = mouseSensitivity * Time.deltaTime * deltaTimeMultiplier;
             _index += (int)(_scroll/mouseSensitivityPerSecond);
             _scroll %= mouseSensitivityPerSecond;
-            Debug.Log(_index);
 
             if (_index >= InventorySlots) _index = _index - (InventorySlots - 1) -1;
             else if (_index < 0) _index = InventorySlots + _index;
@@ -110,7 +129,7 @@ namespace Player
             return _items[_index];
         }
 
-        public ItemScriptable DeleteItem()
+        private ItemScriptable DeleteItem()
         {
             ItemScriptable itemToDelete = _items[_index];
 
