@@ -12,7 +12,7 @@ namespace Player
         private Ray _ray;
         private RaycastHit _hitInfo;
 
-        private Transform _cameraRoot;
+        [SerializeField] private Transform _camera;
 
         private PlayerInput _playerInput;
         private Input _input;
@@ -21,7 +21,6 @@ namespace Player
 
         private void Start()
         {
-            _cameraRoot = transform.GetChild(0);
 
             _input = GetComponent<Input>();
 
@@ -35,14 +34,14 @@ namespace Player
 
         private void Interact()
         {
-            _ray.origin = _cameraRoot.position;
-            _ray.direction = _cameraRoot.forward;
+            _ray.origin = _camera.position;
+            _ray.direction = _camera.forward;
 
-            if (_input.interact)
+            if (_input.interact && CastInteractionRayForward())
             {
-                CastInteractionRayForward();
-
+                Debug.Log(_hitInfo.collider.gameObject.name);
                 IInteractable target = _hitInfo.transform?.GetComponent<IInteractable>();
+                
                 if (target != null)
                 {
                     target.Interact(this.gameObject);
@@ -50,14 +49,14 @@ namespace Player
             }
             _input.interact = false;
         } 
-        private void CastInteractionRayForward()
+        private bool CastInteractionRayForward()
         {
-            Physics.Raycast(_ray, out _hitInfo, maxDistance);
+            return Physics.Raycast(_ray, out _hitInfo, maxDistance);
         }
 
         private void OnDrawGizmos()
         {
-            if(_cameraRoot) Gizmos.DrawRay(_cameraRoot.position, _cameraRoot.forward*maxDistance);
+            if(_camera) Gizmos.DrawRay(_camera.position, _camera.forward*maxDistance);
         }
     }
 }
