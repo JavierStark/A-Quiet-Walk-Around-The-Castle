@@ -39,7 +39,6 @@ namespace Player
 
             if (_input.interact && CastInteractionRayForward())
             {
-                Debug.Log(_hitInfo.collider.gameObject.name);
                 IInteractable target = _hitInfo.transform?.GetComponent<IInteractable>();
                 
                 if (target != null)
