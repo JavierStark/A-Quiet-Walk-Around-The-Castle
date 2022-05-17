@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - CinemachineTarget
+  - Pickable
+  - Door
+  - Trigger
   layers:
   - Default
   - TransparentFX

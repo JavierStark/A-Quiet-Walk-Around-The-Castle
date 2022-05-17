@@ -2,17 +2,20 @@ using System;
 using Interactables;
 using Interfaces;
 using Player;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Object = UnityEngine.Object;
 
 namespace Environment
 {
     [RequireComponent(typeof(Animator))]
     public class Door : MonoBehaviour, IInteractable
     {
-        [SerializeField] private Trigger trigger;
-        [SerializeField] private bool open = false;
-        [SerializeField] private string idForKey;
+        public bool open = false;
+        public bool needsKey = false;
+        [HideInInspector] public Trigger trigger;
+        [HideInInspector] public string idForKey;
 
         private Animator _animator;
         private static readonly int Close = Animator.StringToHash("Close");
@@ -25,7 +28,7 @@ namespace Environment
 
         private void Start()
         {
-            trigger.OnActivateTrigger += ChangeState;
+            if(!needsKey) trigger.OnActivateTrigger += ChangeState;
             _animator.SetTrigger(open? Open:Close);   
             _animator.ResetTrigger(Open);
             _animator.ResetTrigger(Close);
@@ -49,6 +52,20 @@ namespace Environment
             {
                 ChangeState();
             }
+        }
+    }
+    
+    [CustomEditor(typeof(Door))]
+    public class DoorEditor : Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+        
+            var door = target as Door;
+            if (door == null) return;
+            if (door.needsKey) door.idForKey = EditorGUILayout.TextField("keyId", door.idForKey);
+            else door.trigger = (Trigger)EditorGUILayout.ObjectField("trigger", door.trigger, typeof(Trigger), true);
         }
     }
 }

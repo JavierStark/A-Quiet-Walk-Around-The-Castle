@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 107389456}
   m_Layer: 0
   m_Name: Lever
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -482,7 +482,7 @@ GameObject:
   - component: {fileID: 379821082}
   m_Layer: 0
   m_Name: Door
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -535,8 +535,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 152c92e7bb634eb48e2ab2feb24b2304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trigger: {fileID: 107389455}
   open: 0
+  needsKey: 1
+  trigger: {fileID: 107389455}
   idForKey: TestDoor
 --- !u!65 &379821082
 BoxCollider:
@@ -797,7 +798,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 2.5
-  _camera: {fileID: 115249488}
+  cameraTransform: {fileID: 115249488}
+  pointerUI: {fileID: 28563790}
 --- !u!114 &473726404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -831,7 +833,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1225221726632376, guid: 64ae000e843ec51469ca6539b68ac713, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4105677843267954, guid: 64ae000e843ec51469ca6539b68ac713, type: 3}
       propertyPath: m_RootOrder
@@ -1234,8 +1236,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 152c92e7bb634eb48e2ab2feb24b2304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trigger: {fileID: 107389455}
   open: 0
+  needsKey: 0
+  trigger: {fileID: 107389455}
   idForKey: 
 --- !u!1 &1454842491
 GameObject:
@@ -1833,6 +1836,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hammer
       objectReference: {fileID: 0}
+    - target: {fileID: 1389851548797159506, guid: 074a764fbeed87c4ca6b702a0f338618,
+        type: 3}
+      propertyPath: m_TagString
+      value: Pickable
+      objectReference: {fileID: 0}
     - target: {fileID: 8155952391976694384, guid: 074a764fbeed87c4ca6b702a0f338618,
         type: 3}
       propertyPath: m_RootOrder
@@ -2025,6 +2033,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Axe
       objectReference: {fileID: 0}
+    - target: {fileID: 8164013320845946210, guid: 0347609be3c4a2644a06a234b3898425,
+        type: 3}
+      propertyPath: m_TagString
+      value: Pickable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0347609be3c4a2644a06a234b3898425, type: 3}
 --- !u!4 &6667676137198400376
@@ -2154,6 +2167,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Mushroom
+      objectReference: {fileID: 0}
+    - target: {fileID: 5042839371107851746, guid: 241b1f147828cfa458bbf1584fdaa540,
+        type: 3}
+      propertyPath: m_TagString
+      value: Pickable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 241b1f147828cfa458bbf1584fdaa540, type: 3}
