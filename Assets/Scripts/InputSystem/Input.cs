@@ -15,6 +15,7 @@ namespace Player
 		public bool drop;
 		public float inventoryScroll;
 		public float inventoryShortcuts;
+		public float lean;
 
 
 		[Header("Movement Settings")]
@@ -70,6 +71,14 @@ namespace Player
 			InventoryShortcutsInput(value.Get<float>());
 		}
 
+		public void OnLean(InputValue value)
+		{
+			LeanInput(value.Get<float>());
+		}
+		
+		
+		
+
 		private void MoveInput(Vector2 newMoveDirection)
 		{
 			move = newMoveDirection;
@@ -108,6 +117,12 @@ namespace Player
 		private void InventoryShortcutsInput(float newInventoryShortcutsInput)
 		{
 			inventoryShortcuts = newInventoryShortcutsInput;
+		}
+
+		private void LeanInput(float newLeanInput)
+		{
+			lean = newLeanInput;
+			Debug.Log(lean);
 		}
 
 #if !UNITY_IOS || !UNITY_ANDROID

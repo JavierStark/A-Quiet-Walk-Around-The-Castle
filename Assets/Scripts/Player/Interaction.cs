@@ -31,6 +31,7 @@ namespace Player
         void Update()
         {
             Interact();
+            _input.interact = false;
         }
 
         private void Interact()
@@ -48,8 +49,7 @@ namespace Player
             if (target != null)
             {
                 target.Interact(this.gameObject);
-            }
-            _input.interact = false;
+            }            
         }
 
         private void ChangePointer(bool interactableDetected)
