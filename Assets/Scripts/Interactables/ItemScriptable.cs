@@ -24,27 +24,4 @@ namespace Interactables
         LockPick,
         Throwable
     }
-
-    [CustomEditor(typeof(ItemScriptable))]
-    public class ItemScriptableEditor : Editor
-    {
-        public override void OnInspectorGUI()
-        {
-            base.OnInspectorGUI();
-        
-            var itemScriptable = target as ItemScriptable;
-            if (itemScriptable != null)
-            {
-                switch (itemScriptable.type)
-                {
-                    case ItemType.Key:
-                    {
-                        itemScriptable.keyId = EditorGUILayout.TextField("keyId", itemScriptable.keyId);
-                        break;
-                    }
-                    default: break;
-                }
-            }
-        }
-    }
 }

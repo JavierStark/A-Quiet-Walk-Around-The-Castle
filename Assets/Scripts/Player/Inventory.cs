@@ -2,13 +2,14 @@ using Interactables;
 using UI;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Input = InputSystem.Input;
 using Random = UnityEngine.Random;
 
 namespace Player
 {
     public class Inventory : MonoBehaviour
     {
-        [Range(1,10)][SerializeField] private float mouseSensitivity = 8;
+        [Range(1,50)][SerializeField] private float scrollSensitivity = 1;
         [Range(0,20)][SerializeField] private float dropDistance = 2;
 
         private const int InventorySlots = 4;
@@ -44,7 +45,7 @@ namespace Player
                 {
                     inventoryUI.DeleteItem(_index);
                     var t = transform;
-                    var cameraTransform = transform.GetChild(0).transform;
+                    var cameraTransform = transform.GetChild(0).GetChild(0).transform;
 
                     Vector3 dropPosition;
                     Quaternion dropRotation = item.objectGameObject.transform.rotation;
@@ -91,8 +92,8 @@ namespace Player
 
         private void IndexChangeByScroll()
         {
-            float deltaTimeMultiplier = 400;
-            float mouseSensitivityPerSecond = mouseSensitivity * Time.deltaTime * deltaTimeMultiplier;
+            float deltaTimeMultiplier = 100;
+            float mouseSensitivityPerSecond = scrollSensitivity * Time.deltaTime * deltaTimeMultiplier;
             _index += (int)(_scroll/mouseSensitivityPerSecond);
             _scroll %= mouseSensitivityPerSecond;
 

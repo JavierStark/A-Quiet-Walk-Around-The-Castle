@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Player
+namespace InputSystem
 {
 	public class Input : MonoBehaviour
 	{
@@ -16,18 +16,22 @@ namespace Player
 		public float inventoryScroll;
 		public float inventoryShortcuts;
 		public float lean;
-
+		public float openLock;
+		public float rotateLockPick;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
-
-#if !UNITY_IOS || !UNITY_ANDROID
 
 		[Header("Mouse Cursor Settings")]
 		public bool cursorLocked = true;
 
 		public bool cursorInputForLook = true;
-#endif
+		private PlayerInput _playerInput;
+
+		private void Start()
+		{
+			_playerInput = GetComponent<PlayerInput>();
+		}
 
 		public void OnMove(InputValue value)
 		{
@@ -75,6 +79,16 @@ namespace Player
 		{
 			LeanInput(value.Get<float>());
 		}
+
+		public void OnOpenLock(InputValue value)
+		{
+			OpenLock(value.Get<float>());
+		}
+		public void OnRotateLockPick(InputValue value)
+		{
+			RotateLockPick(value.Get<float>());	
+		}
+		
 		
 		
 		
@@ -122,10 +136,30 @@ namespace Player
 		private void LeanInput(float newLeanInput)
 		{
 			lean = newLeanInput;
-			Debug.Log(lean);
 		}
 
-#if !UNITY_IOS || !UNITY_ANDROID
+		private void OpenLock(float newOpenLockInput)
+		{
+			openLock = newOpenLockInput;
+		}
+
+		private void RotateLockPick(float newRotateLockPickInput)
+		{
+			rotateLockPick = newRotateLockPickInput;
+		}
+
+
+
+
+		
+		public void ChangeToPlayerActionMap() => ChangeActionMap("Player");
+		public void ChangeToLockPickingActionMap() => ChangeActionMap("LockPicking");
+		private void ChangeActionMap(string map)
+		{
+			if (_playerInput.currentActionMap.name == map) return; 
+			_playerInput.SwitchCurrentActionMap(map);
+		}
+
 
 		private void OnApplicationFocus(bool hasFocus)
 		{
@@ -137,7 +171,6 @@ namespace Player
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
 		}
 
-#endif
 
 	}
 	

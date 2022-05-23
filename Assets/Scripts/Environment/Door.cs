@@ -55,17 +55,5 @@ namespace Environment
         }
     }
     
-    [CustomEditor(typeof(Door))]
-    public class DoorEditor : Editor
-    {
-        public override void OnInspectorGUI()
-        {
-            base.OnInspectorGUI();
-        
-            var door = target as Door;
-            if (door == null) return;
-            if (door.needsKey) door.idForKey = EditorGUILayout.TextField("keyId", door.idForKey);
-            else door.trigger = (Trigger)EditorGUILayout.ObjectField("trigger", door.trigger, typeof(Trigger), true);
-        }
-    }
+   
 }

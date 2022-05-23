@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Input = InputSystem.Input;
 
 namespace Player
 {
@@ -65,9 +66,9 @@ namespace Player
 		private Input _input;
 		private GameObject _mainCamera;
 
-		private const float _threshold = 0.01f;
+		private const float Threshold = 0.00f;
 		
-		private bool IsCurrentDeviceMouse => _playerInput.currentControlScheme == "KeyboardMouse";
+		private bool IsCurrentDeviceMouse => true /*_playerInput.currentControlScheme == "KeyboardMouse"*/;
 
 		private void Awake()
 		{
@@ -111,14 +112,14 @@ namespace Player
 		private void CameraRotation()
 		{
 			// if there is an input
-			if (_input.look.sqrMagnitude >= _threshold)
+			if (_input.look.sqrMagnitude >= Threshold)
 			{
 				//Don't multiply mouse input by Time.deltaTime
-				float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
+				float deltaTimeMultiplier = 1f;  /*IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;*/
 				
 				_cinemachineTargetPitch += _input.look.y * RotationSpeed * deltaTimeMultiplier;
 				_rotationVelocity = _input.look.x * RotationSpeed * deltaTimeMultiplier;
-
+				
 				// clamp our pitch rotation
 				_cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
 
