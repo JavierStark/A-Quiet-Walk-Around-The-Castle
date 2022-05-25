@@ -13,9 +13,13 @@ namespace Environment
     public class Door : MonoBehaviour, IInteractable
     {
         public bool open = false;
-        public bool needsKey = false;
+        public DoorType doorType;
+        //Trigger
         [HideInInspector] public Trigger trigger;
-        [HideInInspector] public string idForKey;
+        //Key
+        [HideInInspector] public string idForKey = "KeyDoor";
+        //LockPick
+        [HideInInspector] public float lockPickingDifficulty = 1000;
 
         private Animator _animator;
         private static readonly int Close = Animator.StringToHash("Close");
@@ -28,31 +32,63 @@ namespace Environment
 
         private void Start()
         {
-            if(!needsKey) trigger.OnActivateTrigger += ChangeState;
-            _animator.SetTrigger(open? Open:Close);   
+            _animator.SetTrigger(open? Open:Close);
             _animator.ResetTrigger(Open);
             _animator.ResetTrigger(Close);
+            
+            if(doorType == DoorType.Trigger) trigger.OnActivateTrigger += ChangeState;
         }
 
-        private void ChangeState()
+        
+        public void ChangeState()
         {
+            if (doorType is DoorType.Key or DoorType.LockPick) doorType = DoorType.Free;
             _animator.SetTrigger(open ? Close : Open);
             open = !open;
         }
 
         public void Interact(GameObject playerWhoInteract)
         {
-            if (idForKey == null) return;
-            
-            ItemScriptable itemInHand = playerWhoInteract.GetComponent<Inventory>().GetItem();
-            if (!itemInHand) return;
-            
-            if (itemInHand.type != ItemType.Key) return;
-            if (idForKey == itemInHand.keyId)
+            if (doorType == DoorType.Trigger) return;
+            switch (doorType)
             {
-                ChangeState();
+                case DoorType.Key:
+                {
+                    if (idForKey == null) break;
+
+                    ItemScriptable itemInHand = playerWhoInteract.GetComponent<Inventory>().GetItem();
+                    if (!itemInHand) break;
+                    if (itemInHand.type != ItemType.Key) break;
+                    
+                    if (idForKey == itemInHand.keyId) ChangeState();
+
+                    break;
+                }
+
+                case DoorType.LockPick:
+                {
+                    playerWhoInteract.GetComponent<LockPicking.LockPicking>().Activate(lockPickingDifficulty,this);
+                    
+                    break;
+                }
+
+                case DoorType.Free:
+                {
+                    ChangeState();
+                    
+                    break;
+                }
             }
         }
+    }
+    
+
+    public enum DoorType
+    {
+        Free,
+        Key,
+        Trigger,
+        LockPick
     }
     
    
