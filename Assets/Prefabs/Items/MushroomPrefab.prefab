@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &7111006396948492499
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2834062778834742577, guid: 2757537f0c29f184691fba7f25a6dcad,
+        type: 3}
+      propertyPath: m_Name
+      value: Mushroom
+      objectReference: {fileID: 0}
+    - target: {fileID: 4986295090185606931, guid: 2757537f0c29f184691fba7f25a6dcad,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4986295090185606931, guid: 2757537f0c29f184691fba7f25a6dcad,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 4986295090185606931, guid: 2757537f0c29f184691fba7f25a6dcad,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4986295090185606931, guid: 2757537f0c29f184691fba7f25a6dcad,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.858
+      objectReference: {fileID: 0}
+    - target: {fileID: 4986295090185606931, guid: 2757537f0c29f184691fba7f25a6dcad,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4986295090185606931, guid: 2757537f0c29f184691fba7f25a6dcad,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4986295090185606931, guid: 2757537f0c29f184691fba7f25a6dcad,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4986295090185606931, guid: 2757537f0c29f184691fba7f25a6dcad,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4986295090185606931, guid: 2757537f0c29f184691fba7f25a6dcad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4986295090185606931, guid: 2757537f0c29f184691fba7f25a6dcad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4986295090185606931, guid: 2757537f0c29f184691fba7f25a6dcad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221395192564319001, guid: 2757537f0c29f184691fba7f25a6dcad,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 3896966843851858568, guid: 57aae886b57d3644eb8e5f87af40750c,
+        type: 3}
+    - target: {fileID: 6439889734631028718, guid: 2757537f0c29f184691fba7f25a6dcad,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.08386089
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439889734631028718, guid: 2757537f0c29f184691fba7f25a6dcad,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.0889354
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439889734631028718, guid: 2757537f0c29f184691fba7f25a6dcad,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 0.083196044
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439889734631028718, guid: 2757537f0c29f184691fba7f25a6dcad,
+        type: 3}
+      propertyPath: m_Center.x
+      value: -0.0025263845
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439889734631028718, guid: 2757537f0c29f184691fba7f25a6dcad,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.045508325
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439889734631028718, guid: 2757537f0c29f184691fba7f25a6dcad,
+        type: 3}
+      propertyPath: m_Center.z
+      value: -0.0027420283
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825949155073663920, guid: 2757537f0c29f184691fba7f25a6dcad,
+        type: 3}
+      propertyPath: itemScriptable
+      value: 
+      objectReference: {fileID: 11400000, guid: d4c7b2d437dd6b34eb6fb8330d66dd3c,
+        type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2757537f0c29f184691fba7f25a6dcad, type: 3}
