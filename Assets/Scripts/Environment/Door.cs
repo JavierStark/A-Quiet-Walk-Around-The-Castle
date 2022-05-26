@@ -17,13 +17,14 @@ namespace Environment
         //Trigger
         [HideInInspector] public Trigger trigger;
         //Key
-        [HideInInspector] public string idForKey = "KeyDoor";
+        [HideInInspector] public string idForKey;
         //LockPick
-        [HideInInspector] public float lockPickingDifficulty = 1000;
+        [HideInInspector] public float lockPickingDifficulty;
 
         private Animator _animator;
         private static readonly int Close = Animator.StringToHash("Close");
         private static readonly int Open = Animator.StringToHash("Open");
+        private static readonly int OpenFail = Animator.StringToHash("OpenFail");
 
         private void Awake()
         {
@@ -62,23 +63,25 @@ namespace Environment
                     
                     if (idForKey == itemInHand.keyId) ChangeState();
 
-                    break;
+                    return;
                 }
 
                 case DoorType.LockPick:
                 {
                     playerWhoInteract.GetComponent<LockPicking.LockPicking>().Activate(lockPickingDifficulty,this);
                     
-                    break;
+                    return;
                 }
 
                 case DoorType.Free:
                 {
                     ChangeState();
                     
-                    break;
+                    return;
                 }
             }
+            
+            _animator.SetTrigger(OpenFail);
         }
     }
     
