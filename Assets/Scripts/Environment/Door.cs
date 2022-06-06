@@ -51,6 +51,7 @@ namespace Environment
         public void Interact(GameObject playerWhoInteract)
         {
             if (doorType == DoorType.Trigger) return;
+            Debug.Log(doorType);
             switch (doorType)
             {
                 case DoorType.Key:

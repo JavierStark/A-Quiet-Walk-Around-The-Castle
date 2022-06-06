@@ -46,7 +46,6 @@ namespace Player
             if(!_input.interact || !hasHit) return;
 
             IInteractable target = _hitInfo.transform?.GetComponent<IInteractable>();
-            
             if (target != null)
             {
                 target.Interact(this.gameObject);
