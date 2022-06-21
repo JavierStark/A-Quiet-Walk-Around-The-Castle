@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using Environment;
 using Interactables;
+using Lockpicking;
 using LockPicking;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,7 +12,8 @@ namespace LockPicking
 {
     public class LockPicking : MonoBehaviour
     {
-        [SerializeField] private Lock lockObject;
+        //[SerializeField] private Lock lockObject;
+        [SerializeField] private SpiderMinigame _spiderMinigame;
         [SerializeField] private bool changeStateEDITOR;
         private bool _active;
         private Input _input;
@@ -34,45 +36,47 @@ namespace LockPicking
             
             
             
-            if (_active)
-            {
-                RotateLockPick();
-                OpenLock();
-            }
+            // if (_active)
+            // {
+            //     RotateLockPick();
+            //     OpenLock();
+            // }
         }
 
         public void Activate(float difficulty, Door door)
         {
-            if (_active) return;
-            _door = door;
-            _active = true;
-            _input.ChangeToLockPickingActionMap();
-            lockObject.gameObject.SetActive(true);
-            lockObject.Setup(this, difficulty);
-        }
-        public void Deactivate()
-        {
-            if (!_active) return;
-            _door = null;
-            _active = false;
-            _input.ChangeToPlayerActionMap();
-            lockObject.gameObject.SetActive(false);
-        }
+            _spiderMinigame.StartMinigame();
 
-        public void OpenDoor()
-        {
-            _door.ChangeState();
-            Deactivate();
+            // if (_active) return;
+            // _door = door;
+            // _active = true;
+            // _input.ChangeToLockPickingActionMap();
+            // lockObject.gameObject.SetActive(true);
+            // lockObject.Setup(this, difficulty);
         }
-
-        private void RotateLockPick()
-        {
-            lockObject.RotateLockPick(_input.rotateLockPick);
-        }
-        
-        private void OpenLock()
-        {
-            lockObject.OpenLock(_input.openLock);
-        }
+        // public void Deactivate()
+        // {
+        //     if (!_active) return;
+        //     _door = null;
+        //     _active = false;
+        //     _input.ChangeToPlayerActionMap();
+        //     lockObject.gameObject.SetActive(false);
+        // }
+        //
+        // public void OpenDoor()
+        // {
+        //     _door.ChangeState();
+        //     Deactivate();
+        // }
+        //
+        // private void RotateLockPick()
+        // {
+        //     lockObject.RotateLockPick(_input.rotateLockPick);
+        // }
+        //
+        // private void OpenLock()
+        // {
+        //     lockObject.OpenLock(_input.openLock);
+        // }
     }
 }

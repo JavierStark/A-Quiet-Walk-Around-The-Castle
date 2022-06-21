@@ -50,7 +50,7 @@ namespace LockPicking
 
         private void Open()
         {
-            _caller.OpenDoor();
+            //_caller.OpenDoor();
         }
 
         public void Setup(LockPicking caller, float threshold)

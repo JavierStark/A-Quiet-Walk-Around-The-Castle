@@ -456,6 +456,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "SpiderMinigame",
+            "id": "4cb33979-c074-42d1-b9de-bba461dfb94c",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "05997a4a-44e4-4d0e-b32a-bcdefc43efb1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "3e432cd6-6487-49b1-a254-82991339b738",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
