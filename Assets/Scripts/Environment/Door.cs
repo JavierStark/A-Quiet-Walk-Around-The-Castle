@@ -22,6 +22,7 @@ namespace Environment
         [HideInInspector] public float lockPickingDifficulty;
 
         private Animator _animator;
+        [SerializeField]private Transform _cameraTransform;
         private static readonly int Close = Animator.StringToHash("Close");
         private static readonly int Open = Animator.StringToHash("Open");
         private static readonly int OpenFail = Animator.StringToHash("OpenFail");
@@ -29,6 +30,7 @@ namespace Environment
         private void Awake()
         {
             _animator = GetComponent<Animator>();
+            _cameraTransform = transform.parent.GetChild(0);
         }
 
         private void Start()
@@ -83,6 +85,11 @@ namespace Environment
             }
             
             _animator.SetTrigger(OpenFail);
+        }
+
+        public Transform GetCameraTransform()
+        {
+            return _cameraTransform;
         }
     }
     

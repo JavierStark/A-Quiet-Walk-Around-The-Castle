@@ -13,8 +13,8 @@ namespace LockPicking
     public class LockPicking : MonoBehaviour
     {
         //[SerializeField] private Lock lockObject;
-        [SerializeField] private SpiderMinigame _spiderMinigame;
-        [SerializeField] private bool changeStateEDITOR;
+        [SerializeField] private SpiderMinigame spiderMinigame;
+        [SerializeField] private bool changeStateEditor;
         private bool _active;
         private Input _input;
         private Door _door;
@@ -45,7 +45,7 @@ namespace LockPicking
 
         public void Activate(float difficulty, Door door)
         {
-            _spiderMinigame.StartMinigame();
+            spiderMinigame.StartMinigame(door);
 
             // if (_active) return;
             // _door = door;
