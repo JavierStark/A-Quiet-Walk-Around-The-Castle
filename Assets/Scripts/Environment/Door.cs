@@ -19,7 +19,7 @@ namespace Environment
         //Key
         [HideInInspector] public string idForKey;
         //LockPick
-        [HideInInspector] public float lockPickingDifficulty;
+        [HideInInspector] public int lockPickingDifficulty;
 
         private Animator _animator;
         [SerializeField]private Transform _cameraTransform;

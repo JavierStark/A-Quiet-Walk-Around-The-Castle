@@ -33,9 +33,7 @@ namespace LockPicking
             // }
             // changeStateEDITOR = false;
 
-            
-            
-            
+
             // if (_active)
             // {
             //     RotateLockPick();
@@ -43,40 +41,28 @@ namespace LockPicking
             // }
         }
 
-        public void Activate(float difficulty, Door door)
+        public void Activate(int difficulty, Door door)
         {
-            spiderMinigame.StartMinigame(door);
+            if (_active) return;
+            _door = door;
+            _active = true;
+            _input.ChangeToSpiderMinigameActionMap();
 
-            // if (_active) return;
-            // _door = door;
-            // _active = true;
-            // _input.ChangeToLockPickingActionMap();
-            // lockObject.gameObject.SetActive(true);
-            // lockObject.Setup(this, difficulty);
+            spiderMinigame.StartMinigame(difficulty, _door);
         }
-        // public void Deactivate()
-        // {
-        //     if (!_active) return;
-        //     _door = null;
-        //     _active = false;
-        //     _input.ChangeToPlayerActionMap();
-        //     lockObject.gameObject.SetActive(false);
-        // }
-        //
-        // public void OpenDoor()
-        // {
-        //     _door.ChangeState();
-        //     Deactivate();
-        // }
-        //
-        // private void RotateLockPick()
-        // {
-        //     lockObject.RotateLockPick(_input.rotateLockPick);
-        // }
-        //
-        // private void OpenLock()
-        // {
-        //     lockObject.OpenLock(_input.openLock);
-        // }
+
+        public void Deactivate()
+        {
+            if (!_active) return;
+            _door = null;
+            _active = false;
+            _input.ChangeToPlayerActionMap();
+        }
+
+        public void OpenDoor()
+        {
+            _door.ChangeState();
+            Deactivate();
+        }
     }
 }

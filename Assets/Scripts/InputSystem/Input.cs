@@ -16,8 +16,7 @@ namespace InputSystem
 		public float inventoryScroll;
 		public float inventoryShortcuts;
 		public float lean;
-		public float openLock;
-		public float rotateLockPick;
+		public float spiderMinigameMove;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -80,18 +79,13 @@ namespace InputSystem
 			LeanInput(value.Get<float>());
 		}
 
-		public void OnOpenLock(InputValue value)
+		public void OnSpiderMinigameMove(InputValue value)
 		{
-			OpenLock(value.Get<float>());
+			SpiderMinigameMoveInput(value.Get<float>());
 		}
-		public void OnRotateLockPick(InputValue value)
-		{
-			RotateLockPick(value.Get<float>());	
-		}
+
 		
-		
-		
-		
+
 
 		private void MoveInput(Vector2 newMoveDirection)
 		{
@@ -137,15 +131,10 @@ namespace InputSystem
 		{
 			lean = newLeanInput;
 		}
-
-		private void OpenLock(float newOpenLockInput)
+		
+		private void SpiderMinigameMoveInput(float newSpiderMinigameMove)
 		{
-			openLock = newOpenLockInput;
-		}
-
-		private void RotateLockPick(float newRotateLockPickInput)
-		{
-			rotateLockPick = newRotateLockPickInput;
+			spiderMinigameMove = newSpiderMinigameMove;
 		}
 
 
@@ -153,7 +142,7 @@ namespace InputSystem
 
 		
 		public void ChangeToPlayerActionMap() => ChangeActionMap("Player");
-		public void ChangeToLockPickingActionMap() => ChangeActionMap("LockPicking");
+		public void ChangeToSpiderMinigameActionMap() => ChangeActionMap("SpiderMinigame");
 		private void ChangeActionMap(string map)
 		{
 			if (_playerInput.currentActionMap.name == map) return; 
