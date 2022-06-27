@@ -30,7 +30,7 @@ namespace Environment
         private void Awake()
         {
             _animator = GetComponent<Animator>();
-            _cameraTransform = transform.parent.GetChild(0);
+            _cameraTransform = transform.parent.GetChild(0).GetChild(1);
         }
 
         private void Start()
