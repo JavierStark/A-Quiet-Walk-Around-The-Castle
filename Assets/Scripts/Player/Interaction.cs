@@ -21,7 +21,7 @@ namespace Player
         private Input _input;
 
         private bool IsCurrentDeviceMouse => _playerInput.currentControlScheme == "KeyboardMouse";
-
+    
         private void Start()
         {
             _input = GetComponent<Input>();
