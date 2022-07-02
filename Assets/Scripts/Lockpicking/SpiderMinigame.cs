@@ -22,10 +22,8 @@ namespace Lockpicking
         public void FinishMinigame(bool completed)
         {
             cameraSwitching.SwitchState(false);
-            if (completed)
-            {
-                _lockPickingManager.OpenDoor();
-            }
+            if (completed) _lockPickingManager.OpenDoor();
+            else _lockPickingManager.Deactivate();
         }
     }
 }

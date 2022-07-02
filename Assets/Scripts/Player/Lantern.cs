@@ -15,6 +15,7 @@ namespace Player
         [SerializeField] private Transform playerCameraRoot;
 
         [SerializeField] private int rotationSpeed = 5;
+        [SerializeField] private LayerMask raycastLayerMask;
         
         private void Start()
         {
@@ -24,7 +25,7 @@ namespace Player
         private void Update()
         {
             UpdateRay();
-            Physics.Raycast(_ray, out _hitInfo);
+            Physics.Raycast(_ray, out _hitInfo, 20, raycastLayerMask);
 
             transform.rotation = Quaternion.Slerp(transform.rotation, playerCameraRoot.rotation, Time.deltaTime * rotationSpeed);
             RotateModel();
@@ -45,7 +46,7 @@ namespace Player
         private void RotateModel()
         {
             var model = transform.GetChild(0);
-            Quaternion targetRotation = Quaternion.LookRotation(_hitInfo.point - model.position);
+            Quaternion targetRotation = Quaternion.LookRotation(_hitInfo.point - model.position, _thisTransform.up);
             model.rotation = Quaternion.Slerp(model.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
     }
