@@ -12,7 +12,7 @@ namespace Interactables
         [SerializeField] private ItemScriptable itemScriptable;
         public ItemScriptable GetItem => itemScriptable;
 
-        void IInteractable.Interact(GameObject playerWhoInteract)
+        void IInteractable.Interact(GameObject playerWhoInteract , ItemScriptable itemInHand)
         {
             Debug.Log(this.name+ " was interacted");
             if (playerWhoInteract.GetComponent<Inventory>().AddItem(itemScriptable)){

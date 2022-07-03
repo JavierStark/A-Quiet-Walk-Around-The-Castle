@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,8 @@ namespace Player
         private Ray _ray;
         private RaycastHit _hitInfo;
 
+        private Inventory _inventory;
+
         [SerializeField] private Transform cameraTransform;
         [SerializeField] private Image pointerUI;
 
@@ -21,11 +24,15 @@ namespace Player
         private Input _input;
 
         private bool IsCurrentDeviceMouse => _playerInput.currentControlScheme == "KeyboardMouse";
-    
-        private void Start()
+
+        private void Awake()
         {
             _input = GetComponent<Input>();
+            _inventory = GetComponent<Inventory>();
+        }
 
+        private void Start()
+        {
             _ray = new Ray();
         }
 
@@ -48,7 +55,7 @@ namespace Player
             IInteractable target = _hitInfo.transform?.GetComponent<IInteractable>();
             if (target != null)
             {
-                target.Interact(this.gameObject);
+                target.Interact(gameObject, _inventory.GetItem());
             }            
         }
 

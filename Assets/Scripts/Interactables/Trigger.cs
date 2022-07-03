@@ -20,7 +20,7 @@ namespace Interactables
             _animator = GetComponent<Animator>();
         }
 
-        public void Interact(GameObject playerWhoInteract)
+        public void Interact(GameObject playerWhoInteract, ItemScriptable itemInHand)
         {            
             _animator.SetTrigger(_active? Up:Down);
             _active = !_active;

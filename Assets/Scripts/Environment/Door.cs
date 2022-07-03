@@ -50,7 +50,7 @@ namespace Environment
             open = !open;
         }
 
-        public void Interact(GameObject playerWhoInteract)
+        public void Interact(GameObject playerWhoInteract, ItemScriptable itemInHand)
         {
             if (doorType == DoorType.Trigger) return;
             Debug.Log(doorType);
@@ -59,18 +59,19 @@ namespace Environment
                 case DoorType.Key:
                 {
                     if (idForKey == null) break;
-
-                    ItemScriptable itemInHand = playerWhoInteract.GetComponent<Inventory>().GetItem();
                     if (!itemInHand) break;
                     if (itemInHand.type != ItemType.Key) break;
                     
-                    if (idForKey == itemInHand.keyId) ChangeState();
+                    if (idForKey == itemInHand.id) ChangeState();
 
                     return;
                 }
 
                 case DoorType.LockPick:
                 {
+                    if (!itemInHand) break;
+                    if (itemInHand.type != ItemType.LockPick) break;
+                    playerWhoInteract.GetComponent<Inventory>().DeleteItem();
                     playerWhoInteract.GetComponent<LockPicking.LockPicking>().Activate(lockPickingDifficulty,this);
                     
                     return;

@@ -126,11 +126,11 @@ namespace Player
             return _items[_index];
         }
 
-        private ItemScriptable DeleteItem()
+        public ItemScriptable DeleteItem()
         {
             ItemScriptable itemToDelete = _items[_index];
-
             _items[_index] = null;
+            inventoryUI.DeleteItem(_index);
 
             return itemToDelete;
         }

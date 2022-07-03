@@ -12,7 +12,7 @@ namespace Interactables
         public string objectName;
         public string description;
         public ItemType type;
-        [HideInInspector] public string keyId;
+        public string id;
         public Sprite icon;
         public GameObject objectGameObject;
     }
