@@ -13,7 +13,6 @@ namespace LockPicking
 {
     public class LockPicking : MonoBehaviour
     {
-        //[SerializeField] private Lock lockObject;
         [SerializeField] private SpiderMinigame spiderMinigame;
         [SerializeField] private bool changeStateEditor;
         [SerializeField] private float waitBetweenMinigameAndOpen = 2;
@@ -24,23 +23,6 @@ namespace LockPicking
         private void Start()
         {
             _input = GetComponent<Input>();
-        }
-
-        private void Update()
-        {
-            // if (changeStateEDITOR)
-            // {
-            //     if(_active) Deactivate();
-            //     else Activate();
-            // }
-            // changeStateEDITOR = false;
-
-
-            // if (_active)
-            // {
-            //     RotateLockPick();
-            //     OpenLock();
-            // }
         }
 
         public void Activate(int difficulty, Door door)
