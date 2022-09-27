@@ -1,8 +1,7 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Story
+namespace _Scripts.Story
 {
     public class StoryTrigger : MonoBehaviour
     {

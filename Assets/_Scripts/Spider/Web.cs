@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
-using Unity.VisualScripting;
-using UnityEngine;
-using UnityEngine.UIElements;
+﻿using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Spider
+namespace _Scripts.Spider
 {
     public class Web : MonoBehaviour
     {

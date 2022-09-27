@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using _Scripts.Spider;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;

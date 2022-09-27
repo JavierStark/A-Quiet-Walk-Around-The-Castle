@@ -10,6 +10,7 @@ using Object = UnityEngine.Object;
 namespace Environment
 {
     [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(AudioSource))]
     public class Door : MonoBehaviour, IInteractable
     {
         public bool open = false;
@@ -27,9 +28,14 @@ namespace Environment
         private static readonly int Open = Animator.StringToHash("Open");
         private static readonly int OpenFail = Animator.StringToHash("OpenFail");
 
+        private AudioSource _audioSource;
+        [SerializeField] private AudioClip openDoorClip;
+        [SerializeField] private AudioClip closeDoorClip;
+    
         private void Awake()
         {
             _animator = GetComponent<Animator>();
+            _audioSource = GetComponent<AudioSource>();
             _cameraTransform = transform.parent.GetChild(0).GetChild(1);
         }
 
@@ -47,6 +53,7 @@ namespace Environment
         {
             if (doorType is DoorType.Key or DoorType.LockPick) doorType = DoorType.Free;
             _animator.SetTrigger(open ? Close : Open);
+            _audioSource.PlayOneShot(open? closeDoorClip : openDoorClip);
             open = !open;
         }
 
