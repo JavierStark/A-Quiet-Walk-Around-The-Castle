@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using _Scripts.Interfaces;
 using UnityEngine;
-using Interfaces;
 using Player;
 using UnityEngine.Serialization;
 

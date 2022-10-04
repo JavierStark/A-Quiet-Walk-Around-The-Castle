@@ -1,4 +1,4 @@
-using Environment;
+using _Scripts.Environment;
 using Interactables;
 using UnityEditor;
 

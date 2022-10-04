@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Scripts.Interfaces;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Interfaces;
 using UnityEngine.UI;
 using Input = InputSystem.Input;
 

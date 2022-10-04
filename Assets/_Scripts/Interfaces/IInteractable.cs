@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using Interactables;
 using UnityEngine;
 
-namespace Interfaces
+namespace _Scripts.Interfaces
 {
     public interface IInteractable
     {

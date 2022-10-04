@@ -1,5 +1,5 @@
+using _Scripts.Interfaces;
 using Interactables;
-using Interfaces;
 using UnityEngine;
 
 namespace _Scripts.Interactables

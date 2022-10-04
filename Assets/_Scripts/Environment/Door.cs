@@ -1,14 +1,10 @@
-using System;
 using _Scripts.Interactables;
+using _Scripts.Interfaces;
 using Interactables;
-using Interfaces;
 using Player;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Object = UnityEngine.Object;
 
-namespace Environment
+namespace _Scripts.Environment
 {
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(AudioSource))]
@@ -24,7 +20,7 @@ namespace Environment
         [HideInInspector] public int lockPickingDifficulty;
 
         private Animator _animator;
-        [SerializeField]private Transform _cameraTransform;
+        [SerializeField] private Transform cameraTransform;
         private static readonly int Close = Animator.StringToHash("Close");
         private static readonly int Open = Animator.StringToHash("Open");
         private static readonly int OpenFail = Animator.StringToHash("OpenFail");
@@ -37,7 +33,7 @@ namespace Environment
         {
             _animator = GetComponent<Animator>();
             _audioSource = GetComponent<AudioSource>();
-            _cameraTransform = transform.parent.GetChild(0).GetChild(1);
+            cameraTransform = transform.parent.GetChild(0).GetChild(1);
         }
 
         private void Start()
@@ -49,7 +45,7 @@ namespace Environment
             if(doorType == DoorType.Trigger) trigger.OnActivateTrigger += ChangeState;
         }
 
-        
+
         public void ChangeState()
         {
             if (doorType is DoorType.Key or DoorType.LockPick) doorType = DoorType.Free;
@@ -98,7 +94,7 @@ namespace Environment
 
         public Transform GetCameraTransform()
         {
-            return _cameraTransform;
+            return cameraTransform;
         }
     }
     

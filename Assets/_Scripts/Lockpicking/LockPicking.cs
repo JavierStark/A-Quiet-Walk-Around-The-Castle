@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Diagnostics.CodeAnalysis;
-using Environment;
+using _Scripts.Environment;
 using Interactables;
 using Lockpicking;
 using LockPicking;

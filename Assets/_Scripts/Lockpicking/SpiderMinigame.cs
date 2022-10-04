@@ -1,5 +1,5 @@
+using _Scripts.Environment;
 using Camera;
-using Environment;
 using UnityEngine;
 using UnityEngine.Rendering;
 
