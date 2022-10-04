@@ -5,11 +5,11 @@ namespace _Scripts.Story
 {
     public class StoryTrigger : MonoBehaviour
     {
-        [SerializeField] private UnityEvent toActivate;
+        [SerializeField] private UnityEvent onTrigger;
 
         private void OnTriggerEnter(Collider other)
         {
-            toActivate.Invoke();
+            onTrigger.Invoke();
             gameObject.SetActive(false);
         }
     }

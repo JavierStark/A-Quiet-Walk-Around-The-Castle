@@ -5,6 +5,7 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace _Scripts.Story.Enemy
 {
@@ -19,38 +20,20 @@ namespace _Scripts.Story.Enemy
 
         private Transform _target;
         private Rigidbody _rigidbody;
+        private NavMeshAgent _navMeshAgent;
 
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
+            _navMeshAgent = GetComponent<NavMeshAgent>();
         }
 
         private void Start()
         {
             model = GetComponentInChildren<MeshRenderer>().gameObject;
+            _navMeshAgent.enabled = false;
             model.SetActive(false);
         }
-
-        private void Update()
-        {
-            if (!_target) return;
-            Move();
-        }
-
-        private void Move()
-        {
-            Vector3 position = transform.position;
-            
-            Vector3 direction = _target.position - position;
-            direction = direction.normalized;
-
-            float magnitude = Time.deltaTime * unitsPerSecond;
-
-            
-            
-            _rigidbody.MovePosition(position + direction*magnitude);
-        }
-
         public void FollowPath(int pathIndex)
         {
             StartCoroutine(nameof(FollowPathCoroutine), pathIndex);
@@ -58,28 +41,24 @@ namespace _Scripts.Story.Enemy
         
         private IEnumerator FollowPathCoroutine(int pathIndex)
         {
-            Debug.Log("Path: " + pathIndex);
-            Transform[] currentPath = paths[pathIndex].GetPath();
-            Debug.Log(currentPath.Length);
-            transform.position = NormalizeHeight(currentPath[0].position);
+            Path currentPath = paths[pathIndex];
+            Transform[] currentPathTransform = currentPath.GetPath();
+            transform.position = NormalizeHeight(currentPathTransform[0].position);
             model.SetActive(true);
+            _navMeshAgent.enabled = true;
+            
 
-            for (int i = 1; i < currentPath.Length; i++)
-            {
-                _target = currentPath[i];
-                _target.position = NormalizeHeight(_target.position);
-                SetRotation();
-                yield return new WaitUntil(() => 
-                    Vector3.Distance(transform.position, currentPath[i].position) < distanceToTarget);
-            }
+            _target = currentPathTransform[1];
+            _target.position = NormalizeHeight(_target.position);
+            _navMeshAgent.SetDestination(_target.position);
+            yield return new WaitUntil(() => 
+                Vector3.Distance(transform.position, currentPathTransform[1].position) < distanceToTarget);
             
             model.SetActive(false);
             _target = null;
-        }
-
-        private void SetRotation()
-        {
-            transform.forward = (_target.position - transform.position).normalized;
+            _navMeshAgent.enabled = false;
+            
+            currentPath.PathFinished();
         }
 
         private Vector3 NormalizeHeight(Vector3 v)

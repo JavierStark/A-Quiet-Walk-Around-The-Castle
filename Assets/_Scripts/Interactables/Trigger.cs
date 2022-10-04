@@ -1,14 +1,14 @@
-using System;
+using Interactables;
 using Interfaces;
 using UnityEngine;
 
-namespace Interactables
+namespace _Scripts.Interactables
 {
     public class Trigger : MonoBehaviour, IInteractable
     {
     
-        public delegate void ActivateTrigger();
-        public event ActivateTrigger OnActivateTrigger;
+        public delegate void ActivateTriggerDelegate();
+        public event ActivateTriggerDelegate OnActivateTrigger;
 
         private Animator _animator;
         private bool _active = false;

@@ -1,4 +1,5 @@
 using System;
+using _Scripts.Interactables;
 using Interactables;
 using Interfaces;
 using Player;

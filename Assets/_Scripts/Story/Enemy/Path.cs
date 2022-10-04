@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using _Scripts.Interactables;
+using UnityEngine;
+using UnityEngine.Events;
 
 namespace _Scripts.Story.Enemy
 {
@@ -6,9 +8,19 @@ namespace _Scripts.Story.Enemy
     {
         [SerializeField] private Transform[] points;
         [SerializeField] private float radius;
+
+        [SerializeField] private UnityEvent onPathFinished;
         public Transform[] GetPath()
         {
             return points;
+        }
+
+        public void PathFinished()
+        {
+            if (onPathFinished != null)
+            {
+                onPathFinished.Invoke();
+            }
         }
         
         private void OnDrawGizmos()
