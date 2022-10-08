@@ -13,6 +13,7 @@ namespace InputSystem
 		public bool sprint;
 		public bool interact;
 		public bool drop;
+		public bool lanternInteraction;
 		public float inventoryScroll;
 		public float inventoryShortcuts;
 		public float lean;
@@ -62,6 +63,11 @@ namespace InputSystem
 		public void OnDrop(InputValue value)
 		{
 			DropInput(value.isPressed);
+		}
+
+		public void OnLampInteraction(InputValue value)
+		{
+			LanternInteractionInput(value.isPressed);
 		}
 
 		public void OnInventoryScroll(InputValue value)
@@ -115,6 +121,11 @@ namespace InputSystem
 		private void DropInput(bool newDropState)
 		{
 			drop = newDropState;
+		}
+
+		private void LanternInteractionInput(bool newLanternInteractionState)
+		{
+			lanternInteraction = newLanternInteractionState;
 		}
 
 		private void InventoryScrollInput(float newInventoryScrollState)

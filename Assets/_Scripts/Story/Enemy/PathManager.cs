@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using Unity.Mathematics;
 using Unity.VisualScripting;
@@ -16,7 +18,7 @@ namespace _Scripts.Story.Enemy
         [SerializeField] private float unitsPerSecond;
         [SerializeField] private float distanceToTarget;
 
-        private GameObject model;
+        private List<Transform> models;
 
         private Transform _target;
         private Rigidbody _rigidbody;
@@ -30,9 +32,10 @@ namespace _Scripts.Story.Enemy
 
         private void Start()
         {
-            model = GetComponentInChildren<MeshRenderer>().gameObject;
+            models = transform.GetComponentsInChildren<Transform>().ToList();
+            models.RemoveAt(0);
             _navMeshAgent.enabled = false;
-            model.SetActive(false);
+            Hide(true);
         }
         public void FollowPath(int pathIndex)
         {
@@ -44,7 +47,7 @@ namespace _Scripts.Story.Enemy
             Path currentPath = paths[pathIndex];
             Transform[] currentPathTransform = currentPath.GetPath();
             transform.position = NormalizeHeight(currentPathTransform[0].position);
-            model.SetActive(true);
+            Hide(false);
             _navMeshAgent.enabled = true;
             
 
@@ -54,7 +57,7 @@ namespace _Scripts.Story.Enemy
             yield return new WaitUntil(() => 
                 Vector3.Distance(transform.position, currentPathTransform[1].position) < distanceToTarget);
             
-            model.SetActive(false);
+            Hide(true);
             _target = null;
             _navMeshAgent.enabled = false;
             
@@ -64,6 +67,14 @@ namespace _Scripts.Story.Enemy
         private Vector3 NormalizeHeight(Vector3 v)
         {
             return new Vector3(v.x, transform.position.y, v.z);
+        }
+
+        private void Hide(bool hide)
+        {
+            foreach (Transform model in models)
+            {
+                model.gameObject.SetActive(!hide);
+            }
         }
 
         

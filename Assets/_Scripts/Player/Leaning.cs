@@ -1,12 +1,7 @@
-using System;
-using System.Net.Sockets;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
 using Input = InputSystem.Input;
 
-namespace Player
+namespace _Scripts.Player
 {
     public class Leaning : MonoBehaviour
     {

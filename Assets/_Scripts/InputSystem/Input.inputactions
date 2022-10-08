@@ -51,6 +51,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "LampInteraction",
+                    "type": "Button",
+                    "id": "490ee0c6-b945-43fb-baf7-f7ed0f9ab474",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Drop",
                     "type": "Button",
                     "id": "48a43dde-2974-406c-b92e-a59db4ac9f70",
@@ -382,6 +391,17 @@
                     "processors": "",
                     "groups": "KeyboardMouse",
                     "action": "InventoryScroll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1db05c37-af51-41ed-a28a-474ace9fc6b3",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "LampInteraction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
