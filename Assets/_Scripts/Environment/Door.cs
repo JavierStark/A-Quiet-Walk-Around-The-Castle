@@ -33,7 +33,6 @@ namespace _Scripts.Environment
         {
             _animator = GetComponent<Animator>();
             _audioSource = GetComponent<AudioSource>();
-            cameraTransform = transform.parent.GetChild(0).GetChild(1);
         }
 
         private void Start()
@@ -54,10 +53,18 @@ namespace _Scripts.Environment
             open = !open;
         }
 
+        public void ChangeState(bool wantToOpen)
+        {
+            if (wantToOpen == open) return;
+            ChangeState();
+        }
+
         public void Interact(GameObject playerWhoInteract, ItemScriptable itemInHand)
         {
             if (doorType == DoorType.Trigger) return;
-            Debug.Log(doorType);
+
+            var playerInventory = playerWhoInteract.GetComponent<Inventory>();
+            
             switch (doorType)
             {
                 case DoorType.Key:
@@ -65,9 +72,9 @@ namespace _Scripts.Environment
                     if (idForKey == null) break;
                     if (!itemInHand) break;
                     if (itemInHand.type != ItemType.Key) break;
-                    
-                    if (idForKey == itemInHand.id) ChangeState();
-
+                    if (idForKey != itemInHand.id) break;
+                    playerInventory.DeleteItem();
+                    ChangeState();
                     return;
                 }
 
@@ -75,7 +82,7 @@ namespace _Scripts.Environment
                 {
                     if (!itemInHand) break;
                     if (itemInHand.type != ItemType.LockPick) break;
-                    playerWhoInteract.GetComponent<Inventory>().DeleteItem();
+                    playerInventory.DeleteItem();
                     playerWhoInteract.GetComponent<LockPicking.LockPicking>().Activate(lockPickingDifficulty,this);
                     
                     return;
