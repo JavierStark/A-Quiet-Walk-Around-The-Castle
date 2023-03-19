@@ -60,6 +60,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "LampSwap",
+                    "type": "Button",
+                    "id": "3cce4165-3f84-4e38-81cd-f4d0ca324f59",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Drop",
                     "type": "Button",
                     "id": "48a43dde-2974-406c-b92e-a59db4ac9f70",
@@ -402,6 +411,17 @@
                     "processors": "",
                     "groups": "KeyboardMouse",
                     "action": "LampInteraction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "61171f0c-bcf5-42cb-a7fc-44f8a7bac1e6",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "LampSwap",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

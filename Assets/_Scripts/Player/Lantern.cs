@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Input = InputSystem.Input;
 using Random = UnityEngine.Random;
 
@@ -10,7 +11,8 @@ namespace _Scripts.Player
         private Ray _ray;
         private RaycastHit _hitInfo;
         private Transform _thisTransform;
-        private Light _light;
+        private Transform model;
+        [SerializeField] private new Light light;
         [SerializeField] private Input input;
 
         private float _timeTillTurningOff;
@@ -20,12 +22,13 @@ namespace _Scripts.Player
         [SerializeField] private Transform playerCameraRoot;
 
         [SerializeField] private int rotationSpeed = 5;
+        [SerializeField] private float recuperationSpeed = 0.2f;
         [SerializeField] private LayerMask raycastLayerMask;
 
         private void Awake()
         {
             _thisTransform = transform;
-            _light = GetComponent<Light>();
+            model = transform.GetChild(0);
         }
 
         private void Start()
@@ -39,17 +42,27 @@ namespace _Scripts.Player
             Physics.Raycast(_ray, out _hitInfo, 20, raycastLayerMask);
 
             transform.rotation = Quaternion.Slerp(transform.rotation, playerCameraRoot.rotation, Time.deltaTime * rotationSpeed);
-            //RotateModel();
+            RotateModel();
             UpdatePos();
             TurnOff();
             Interact();
+            SwapSide();
         }
 
         private void Interact()
         {
-            if (!input.lanternInteraction) return;
+            if (!input.lampInteraction) return;
             
             TurnOn();
+        }
+
+        private void SwapSide()
+        {
+            if (!input.lampSwap) return;
+            input.lampSwap = false;
+
+            var modelPosition = model.localPosition;
+            model.localPosition = new Vector3(-modelPosition.x, modelPosition.y, modelPosition.z);
         }
 
         private void UpdateRay()
@@ -60,13 +73,14 @@ namespace _Scripts.Player
 
         private void UpdatePos()
         {
-            transform.position = playerCameraRoot.position;
+            transform.position = Vector3.MoveTowards(transform.position, playerCameraRoot.position, Time.deltaTime * recuperationSpeed);
         }
 
         private void RotateModel()
         {
-            var model = transform.GetChild(0);
-            Quaternion targetRotation = Quaternion.LookRotation(_hitInfo.point - model.position, _thisTransform.up);
+            Quaternion targetRotation =
+                Quaternion.LookRotation(_hitInfo.point - model.position, _thisTransform.up); 
+            
             model.rotation = Quaternion.Slerp(model.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
 
@@ -77,13 +91,13 @@ namespace _Scripts.Player
         private void TurnOn()
         {
             ResetTimer();
-            _light.enabled = true;
+            light.enabled = true;
         }
         private void TurnOff()
         {
             if (_timeTillTurningOff <= 0)
             {
-                _light.enabled = false;
+                light.enabled = false;
                 return;
             }
 

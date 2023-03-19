@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace InputSystem
 {
@@ -13,7 +14,8 @@ namespace InputSystem
 		public bool sprint;
 		public bool interact;
 		public bool drop;
-		public bool lanternInteraction;
+		public bool lampInteraction;
+		public bool lampSwap;
 		public float inventoryScroll;
 		public float inventoryShortcuts;
 		public float lean;
@@ -67,7 +69,11 @@ namespace InputSystem
 
 		public void OnLampInteraction(InputValue value)
 		{
-			LanternInteractionInput(value.isPressed);
+			LampInteractionInput(value.isPressed);
+		}
+		public void OnLampSwap(InputValue value)
+		{
+			LampSwap(value.isPressed);
 		}
 
 		public void OnInventoryScroll(InputValue value)
@@ -123,9 +129,14 @@ namespace InputSystem
 			drop = newDropState;
 		}
 
-		private void LanternInteractionInput(bool newLanternInteractionState)
+		private void LampInteractionInput(bool newLampInteractionState)
 		{
-			lanternInteraction = newLanternInteractionState;
+			lampInteraction = newLampInteractionState;
+		}
+		
+		private void LampSwap(bool newLampSwapInteractionState)
+		{
+			lampSwap = newLampSwapInteractionState;
 		}
 
 		private void InventoryScrollInput(float newInventoryScrollState)
