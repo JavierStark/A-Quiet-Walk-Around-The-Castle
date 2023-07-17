@@ -171,7 +171,6 @@ namespace InputSystem
 			_playerInput.SwitchCurrentActionMap(map);
 		}
 
-
 		private void OnApplicationFocus(bool hasFocus)
 		{
 			SetCursorState(cursorLocked);
