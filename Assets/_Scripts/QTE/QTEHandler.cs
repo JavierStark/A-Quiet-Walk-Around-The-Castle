@@ -14,6 +14,7 @@ public class QTEHandler : MonoBehaviour
     //UI
     [SerializeField] private GameObject keyDisplay;
     [SerializeField] private TMP_Text keyText;
+    [SerializeField] private Animator keyAnimator;
     
     
     private void Awake()
@@ -34,12 +35,19 @@ public class QTEHandler : MonoBehaviour
 
     public void StartQTE(QTEScriptable qte)
     {
-        StartCoroutine(QTECoroutine(qte));
+        StartQTE(qte, () => { }, () => { });
     }
-    IEnumerator QTECoroutine(QTEScriptable qte)
+
+    public void StartQTE(QTEScriptable qte, Action onSuccess, Action onFail)
+    {
+        StartCoroutine(QTECoroutine(qte, onSuccess, onFail));
+    }
+    IEnumerator QTECoroutine(QTEScriptable qte, Action onSuccess, Action onFail)
     {
         _playerInput.DeactivateInput();
         keyDisplay.SetActive(true);
+
+        bool success = true;
 
         foreach (var action in qte.actions)
         {
@@ -52,12 +60,16 @@ public class QTEHandler : MonoBehaviour
             {
                 Debug.Log(count);
                 yield return new WaitUntil(qteActionMap[action.name].WasPressedThisFrame);
+                keyAnimator.SetTrigger("PressKey");
                 yield return new WaitUntil(qteActionMap[action.name].WasReleasedThisFrame);
             }
         }
-        
+
         _playerInput.ActivateInput();
         keyDisplay.SetActive(false);
+        
+        if (success) onSuccess();
+        else onFail();
     }
 
     private void SetBindingText(InputAction action)
