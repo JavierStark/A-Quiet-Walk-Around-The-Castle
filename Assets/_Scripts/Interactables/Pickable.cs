@@ -14,7 +14,6 @@ namespace Interactables
 
         void IInteractable.Interact(GameObject playerWhoInteract , ItemScriptable itemInHand)
         {
-            Debug.Log(this.name+ " was interacted");
             if (playerWhoInteract.GetComponent<Inventory>().AddItem(itemScriptable)){
                 Debug.Log("Added to Inventory");
                 Destroy(this.gameObject);

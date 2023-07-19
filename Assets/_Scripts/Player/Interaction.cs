@@ -1,13 +1,11 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using _Scripts.Interfaces;
+using Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Input = InputSystem.Input;
 
-namespace Player
+namespace _Scripts.Player
 {
     public class Interaction : MonoBehaviour
     {
